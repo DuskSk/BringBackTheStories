@@ -7,25 +7,30 @@ using UnityEngine.SceneManagement;
 public class PlayerControlller : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
-    [SerializeField] private int playerLives = 3;
+    //[SerializeField] private int playerLives = 3;
 
     GameController gameController;
-
     Rigidbody2D myRigidbody;
+    SpriteRenderer mySpriteRenderer;
 
     Vector2 moveInputValue;
-   
+
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         gameController = FindObjectOfType<GameController>();
+        mySpriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+
+        
     }
+
 
     
     void Update()
     {
-        if(playerLives < 1) { Die(); }
+        if(gameController.PlayerLives < 1) { Die(); }
         Run();
+        ChangeColorOnHit();
 
     }
 
@@ -38,23 +43,26 @@ public class PlayerControlller : MonoBehaviour
     {
         
         myRigidbody.velocity = moveInputValue * moveSpeed;
-    }
+    }    
 
-    public void TakeLife()
+    void ChangeColorOnHit()
     {
-        playerLives--;
-        gameController.AddLivesToCanvas();
+        if (gameController.IsPlayerImmune)
+        {
+            mySpriteRenderer.color = Color.magenta;
+        }
+        else
+        {
+            mySpriteRenderer.color = Color.white;
+        }
     }
+    
 
     void Die()
     {
-        Destroy(gameObject);
-        gameController.ProcessPlayerDeath();
-        
-    }
 
-    public int PlayerLives
-    {
-        get { return playerLives; }
+        FindObjectOfType<GameController>().ProcessPlayerDeath();        
+
     }
+    
 }

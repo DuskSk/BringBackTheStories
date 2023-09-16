@@ -96,8 +96,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.011364281, y: -0.10227844}
-  m_Size: {x: 0.4601866, y: 0.6420149}
+  m_Offset: {x: -0.0073196096, y: -0.0033568542}
+  m_Size: {x: 0.3480832, y: 0.42281884}
   m_Direction: 0
 --- !u!114 &4334105019042659976
 MonoBehaviour:
@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  playerLives: 3
 --- !u!114 &5275764316168820996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +237,7 @@ SpriteRenderer:
   m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: -346885963, guid: be89137fdae4f2e42bc7a91da7e1872f, type: 3}
-  m_Color: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

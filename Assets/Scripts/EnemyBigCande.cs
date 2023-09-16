@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyBigCande : EnemyController
 {
     CapsuleCollider2D myCapsuleCollider;
+    GameController gameController;
     private void Awake()
     {
         myPlayer = FindObjectOfType<PlayerControlller>();
@@ -16,7 +17,8 @@ public class EnemyBigCande : EnemyController
     {
         if (!myCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Player"))) {  return; }
 
-        myPlayer.TakeLife();
-        
+        StartCoroutine(FindObjectOfType<GameController>().TakeLife());
+
+
     }
 }

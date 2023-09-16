@@ -9,13 +9,11 @@ public class EnemyController : MonoBehaviour
     protected PlayerControlller myPlayer;
 
     protected Rigidbody2D myEnemyRigidbody;
-
-    GameController gameController;
+    
     void Start()
     {
         myPlayer = FindObjectOfType<PlayerControlller>();
-        myEnemyRigidbody = GetComponent<Rigidbody2D>();
-        gameController = GetComponent<GameController>();
+        myEnemyRigidbody = GetComponent<Rigidbody2D>();        
     }
 
     
@@ -39,9 +37,8 @@ public class EnemyController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-        {           
-            myPlayer.TakeLife(); 
-
+        {
+            StartCoroutine(FindObjectOfType<GameController>().TakeLife());
 
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -9,18 +10,21 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] int totalStoriesCollected = 0;
     [SerializeField] int storiesCollectedPerLevel = 0;
+
     [SerializeField] TextMeshProUGUI livesText;
     [SerializeField] TextMeshProUGUI levelStoriesText;
     [SerializeField] TextMeshProUGUI totalStoriestext;
 
+    [SerializeField]int playerLives;
+    [SerializeField]bool isPlayerImmune = false;
     int storiesLimitPerLevel = 5;
-
-    PlayerControlller playerControlller;
+    int gameControllerAmount;
+    
 
     private void Awake()
     {
-       playerControlller = FindObjectOfType<PlayerControlller>();
-       int gameControllerAmount = FindObjectsOfType<GameController>().Length;
+       
+       gameControllerAmount = FindObjectsOfType<GameController>().Length;
 
        if(gameControllerAmount > 1)
         {
@@ -31,18 +35,19 @@ public class GameController : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
+    private void Start()
+    {
+        
+        AddLivesToCanvas();
+        AddStoriesScoreToCanvas();
+        AddTotalStoriesToCanvas();
+    }
 
     public void ProcessPlayerDeath()
     {
-        if(playerControlller.PlayerLives > 1)
-        {
-            playerControlller.TakeLife();
-
-        }
-        else
-        {
-            ResetGameSession();
-        }
+          
+        ResetGameSession();
+        
     }
     
     void ResetGameSession()
@@ -50,6 +55,47 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(0);
         Destroy(gameObject);
     }
+
+    //Method to take 1 life from player and await for 1s to take it again, so the Player cannot proc multiple times the method cuz of the collision
+    public IEnumerator TakeLife()
+    {
+        if (!isPlayerImmune)
+        {
+            playerLives--;
+            AddLivesToCanvas();
+            isPlayerImmune = true;
+            yield return new WaitForSecondsRealtime(1f);
+        }
+        isPlayerImmune = false;
+        
+        
+    }
+
+    /// 
+    ///  Getter for properties
+    /// 
+
+
+    public int PlayerLives 
+    {
+        get { return playerLives; }
+    }
+
+    public int StoriesCollectedPerLevel
+    {
+        get { return storiesCollectedPerLevel; }
+    }
+
+    public bool IsPlayerImmune
+    {
+        get { return isPlayerImmune; }
+    }
+
+
+
+    /// 
+    /// Canvas related methods
+    /// 
 
     private void AddTotalStoriesToCanvas()
     {
@@ -61,9 +107,9 @@ public class GameController : MonoBehaviour
         levelStoriesText.text = $"Level Stories: {storiesCollectedPerLevel}/5";
     }
 
-    public void AddLivesToCanvas()
+    private void AddLivesToCanvas()
     {
-        livesText.text = $"Lives: {playerControlller.PlayerLives}";
+        livesText.text = "Lives: " + Convert.ToString(playerLives);
     }
 
     public void AddStoriesToTotalScore()
