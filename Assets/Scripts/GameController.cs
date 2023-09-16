@@ -17,23 +17,29 @@ public class GameController : MonoBehaviour
 
     [SerializeField]int playerLives;
     [SerializeField]bool isPlayerImmune = false;
-    int storiesLimitPerLevel = 5;
+
+    GameObject playerCanvas, menuCanvas;
+    
+    
     int gameControllerAmount;
     
 
     private void Awake()
     {
        
-       gameControllerAmount = FindObjectsOfType<GameController>().Length;
+        gameControllerAmount = FindObjectsOfType<GameController>().Length;
+        playerCanvas = GetComponentInChildren<CanvasPlayer>().gameObject;
+        menuCanvas = GetComponentInChildren<CanvasMenu>().gameObject;
+
 
        if(gameControllerAmount > 1)
-        {
+       {
             Destroy(gameObject);
-        }
-        else
-        {
+       }
+       else
+       {
             DontDestroyOnLoad(gameObject);
-        }
+       }
     }
     private void Start()
     {
@@ -41,6 +47,9 @@ public class GameController : MonoBehaviour
         AddLivesToCanvas();
         AddStoriesScoreToCanvas();
         AddTotalStoriesToCanvas();
+        menuCanvas.SetActive(true);
+        playerCanvas.SetActive(false);
+
     }
 
     public void ProcessPlayerDeath()
@@ -96,6 +105,13 @@ public class GameController : MonoBehaviour
     /// 
     /// Canvas related methods
     /// 
+
+    public void LoadFirstLevel()
+    {
+        SceneManager.LoadScene(1);
+        playerCanvas.SetActive(true);
+        menuCanvas.SetActive(false);
+    }
 
     private void AddTotalStoriesToCanvas()
     {
