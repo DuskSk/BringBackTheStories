@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelExit : MonoBehaviour
 {
+    [SerializeField]int storiesLimitPerLevel = 2;
     int currentSceneIndex;
     int nextSceneIndex;
 
@@ -17,7 +18,7 @@ public class LevelExit : MonoBehaviour
     {
         mySpriteRenderer = GetComponent<SpriteRenderer>();
         myParticleSystem = GetComponent<ParticleSystem>();
-        gameController = FindObjectOfType<GameController>();
+        
 
         myParticleSystem.Stop();
 
@@ -28,7 +29,7 @@ public class LevelExit : MonoBehaviour
 
     private void Update()
     {
-        if(gameController.StoriesCollectedPerLevel == 5)
+        if(FindObjectOfType<GameController>().StoriesCollectedPerLevel == storiesLimitPerLevel)
         {
             ActivatePortalToNextLevel();
             
@@ -49,7 +50,11 @@ public class LevelExit : MonoBehaviour
 
     IEnumerator LoadNextLevel()
     {
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(1f);
+
+        gameController = FindObjectOfType<GameController>();
+        gameController.StoriesCollectedPerLevel = 0;
+        gameController.AddStoriesScoreToCanvas();
 
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         nextSceneIndex = currentSceneIndex + 1;
@@ -57,7 +62,12 @@ public class LevelExit : MonoBehaviour
         //Check if there is another scene to load, based on the build length
         if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
         {
-            SceneManager.LoadScene(0);
+            gameController.ResetGameSession();            
+        }
+        else if(nextSceneIndex == SceneManager.sceneCountInBuildSettings - 1)
+        {
+            gameController.LoadFinalLevel();
+            SceneManager.LoadScene(nextSceneIndex);
         }
         else
         {

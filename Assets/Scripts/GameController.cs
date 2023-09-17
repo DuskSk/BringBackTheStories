@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
     [SerializeField]int playerLives;
     [SerializeField]bool isPlayerImmune = false;
 
-    GameObject playerCanvas, menuCanvas;
+    GameObject playerCanvas, menuCanvas, finalLevelCanvas;
     
     
     int gameControllerAmount;
@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour
         gameControllerAmount = FindObjectsOfType<GameController>().Length;
         playerCanvas = GetComponentInChildren<CanvasPlayer>().gameObject;
         menuCanvas = GetComponentInChildren<CanvasMenu>().gameObject;
+        finalLevelCanvas = GetComponentInChildren<FinalLevelReset>().gameObject;
 
 
        if(gameControllerAmount > 1)
@@ -49,6 +50,7 @@ public class GameController : MonoBehaviour
         AddTotalStoriesToCanvas();
         menuCanvas.SetActive(true);
         playerCanvas.SetActive(false);
+        finalLevelCanvas.SetActive(false);
 
     }
 
@@ -59,7 +61,7 @@ public class GameController : MonoBehaviour
         
     }
     
-    void ResetGameSession()
+    public void ResetGameSession()
     {
         SceneManager.LoadScene(0);
         Destroy(gameObject);
@@ -93,6 +95,7 @@ public class GameController : MonoBehaviour
     public int StoriesCollectedPerLevel
     {
         get { return storiesCollectedPerLevel; }
+        set { storiesCollectedPerLevel = value;}
     }
 
     public bool IsPlayerImmune
@@ -113,12 +116,19 @@ public class GameController : MonoBehaviour
         menuCanvas.SetActive(false);
     }
 
+    public void LoadFinalLevel()
+    {
+        
+        playerCanvas.SetActive(false);        
+        finalLevelCanvas.SetActive(true);
+    }
+
     private void AddTotalStoriesToCanvas()
     {
         totalStoriestext.text = $"Total Stories: {totalStoriesCollected}/15";
     }
 
-    private void AddStoriesScoreToCanvas()
+    public void AddStoriesScoreToCanvas()
     {
         levelStoriesText.text = $"Level Stories: {storiesCollectedPerLevel}/5";
     }

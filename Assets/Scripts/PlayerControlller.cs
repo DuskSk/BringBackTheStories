@@ -17,9 +17,9 @@ public class PlayerControlller : MonoBehaviour
 
     void Start()
     {
-        myRigidbody = GetComponent<Rigidbody2D>();
-        gameController = FindObjectOfType<GameController>();
+        myRigidbody = GetComponent<Rigidbody2D>();        
         mySpriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+        gameController = FindObjectOfType<GameController>();
 
         
     }
@@ -28,7 +28,11 @@ public class PlayerControlller : MonoBehaviour
     
     void Update()
     {
-        if(gameController.PlayerLives < 1) { Die(); }
+        if(gameController.PlayerLives < 1) 
+        {
+            Debug.Log("Dead");
+            Die(); 
+        }
         Run();
         ChangeColorOnHit();
 
@@ -50,18 +54,17 @@ public class PlayerControlller : MonoBehaviour
         if (gameController.IsPlayerImmune)
         {
             mySpriteRenderer.color = Color.magenta;
-        }
-        else
-        {
+            StartCoroutine(new WaitForSecondsRealtime(1f));
             mySpriteRenderer.color = Color.white;
         }
+        
     }
     
 
     void Die()
     {
 
-        FindObjectOfType<GameController>().ProcessPlayerDeath();        
+        gameController.ProcessPlayerDeath();        
 
     }
     
