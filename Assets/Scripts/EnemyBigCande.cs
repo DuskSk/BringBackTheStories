@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyBigCande : EnemyController
 {
     CapsuleCollider2D myCapsuleCollider;
-    GameController gameController;
+    
     private void Awake()
     {
         myPlayer = FindObjectOfType<PlayerControlller>();

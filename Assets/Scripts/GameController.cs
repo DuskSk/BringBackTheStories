@@ -48,18 +48,13 @@ public class GameController : MonoBehaviour
         AddLivesToCanvas();
         AddStoriesScoreToCanvas();
         AddTotalStoriesToCanvas();
+
         menuCanvas.SetActive(true);
         playerCanvas.SetActive(false);
         finalLevelCanvas.SetActive(false);
 
     }
 
-    public void ProcessPlayerDeath()
-    {
-          
-        ResetGameSession();
-        
-    }
     
     public void ResetGameSession()
     {
@@ -82,10 +77,15 @@ public class GameController : MonoBehaviour
         
     }
 
-    /// 
-    ///  Getter for properties
-    /// 
+    
+    public void ExitGame()
+    {
+       Application.Quit();
+    }
 
+    /// <summary>
+    ///  Getter for properties
+    /// </summary>
 
     public int PlayerLives 
     {
@@ -105,9 +105,9 @@ public class GameController : MonoBehaviour
 
 
 
-    /// 
+    /// <summary>
     /// Canvas related methods
-    /// 
+    /// </summary>
 
     public void LoadFirstLevel()
     {

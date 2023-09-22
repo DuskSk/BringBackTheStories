@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4516219474440506150}
   - component: {fileID: 1546025039693847629}
   - component: {fileID: 4617934912630731529}
+  - component: {fileID: 6613743154641162842}
   m_Layer: 10
   m_Name: Cande(Enemy)
   m_TagString: Untagged
@@ -119,9 +120,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.030437142, y: -0.54178023}
+  m_Offset: {x: 0.023040831, y: 0}
   serializedVersion: 2
-  m_Radius: 0.36690855
+  m_Radius: 0.34386772
 --- !u!114 &1546025039693847629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,3 +163,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &6613743154641162842
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5386429043671384773}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4307e5bc9706cea4eb031e440789ea4a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

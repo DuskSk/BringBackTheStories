@@ -12,6 +12,7 @@ public class PlayerControlller : MonoBehaviour
     GameController gameController;
     Rigidbody2D myRigidbody;
     SpriteRenderer mySpriteRenderer;
+    CapsuleCollider2D myCapsuleCollider;
 
     Vector2 moveInputValue;
 
@@ -20,6 +21,7 @@ public class PlayerControlller : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();        
         mySpriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
         gameController = FindObjectOfType<GameController>();
+        myCapsuleCollider = GetComponent<CapsuleCollider2D>();
 
         
     }
@@ -34,7 +36,7 @@ public class PlayerControlller : MonoBehaviour
             Die(); 
         }
         Run();
-        ChangeColorOnHit();
+        //ChangeColorOnHit();
 
     }
 
@@ -48,23 +50,14 @@ public class PlayerControlller : MonoBehaviour
         
         myRigidbody.velocity = moveInputValue * moveSpeed;
     }    
-
-    void ChangeColorOnHit()
-    {
-        if (gameController.IsPlayerImmune)
-        {
-            mySpriteRenderer.color = Color.magenta;
-            StartCoroutine(new WaitForSecondsRealtime(1f));
-            mySpriteRenderer.color = Color.white;
-        }
-        
-    }
+    
     
 
     void Die()
     {
-
-        gameController.ProcessPlayerDeath();        
+        StartCoroutine(new WaitForSecondsRealtime(2f));
+        mySpriteRenderer.color = Color.red;
+        gameController.ResetGameSession();        
 
     }
     

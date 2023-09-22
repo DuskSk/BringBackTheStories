@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 public class LevelExit : MonoBehaviour
 {
     [SerializeField]int storiesLimitPerLevel = 2;
+    [SerializeField] bool isFinalLevel;
     int currentSceneIndex;
     int nextSceneIndex;
+    
 
     GameController gameController;
     ParticleSystem myParticleSystem;
@@ -29,7 +31,7 @@ public class LevelExit : MonoBehaviour
 
     private void Update()
     {
-        if(FindObjectOfType<GameController>().StoriesCollectedPerLevel == storiesLimitPerLevel)
+        if(FindObjectOfType<GameController>().StoriesCollectedPerLevel == storiesLimitPerLevel || isFinalLevel)
         {
             ActivatePortalToNextLevel();
             
@@ -84,4 +86,6 @@ public class LevelExit : MonoBehaviour
         mySpriteRenderer.color = Color.white;
         myParticleSystem.Play();
     }
+
+    
 }

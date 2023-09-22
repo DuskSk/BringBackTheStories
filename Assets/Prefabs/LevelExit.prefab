@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 1590913546, guid: be89137fdae4f2e42bc7a91da7e1872f, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -770,8 +770,8 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: -0.06, y: -0.69, z: 0}
-    m_Rotation: {x: 0, y: 180, z: 0}
+    m_Position: {x: -0.06, y: 3.08, z: 0}
+    m_Rotation: {x: -155.7, y: 180.29, z: 0}
     m_Scale: {x: 1, y: 1.38, z: 0.62}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -4906,7 +4906,7 @@ ParticleSystemRenderer:
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
-  m_SortingFudge: -0.97
+  m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
   m_RenderAlignment: 0
@@ -4940,4 +4940,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b7886fb07a70d4cafd91bc8f95b31c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storiesLimitPerLevel: 5
+  storiesLimitPerLevel: 0

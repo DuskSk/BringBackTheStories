@@ -5,8 +5,5 @@ using UnityEngine.SceneManagement;
 
 public class FinalLevelReset : MonoBehaviour
 {
-    public void ResetGame()
-    {
-        
-    }
+    
 }
